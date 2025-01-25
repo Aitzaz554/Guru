@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Guru App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: white;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        .dashboard-container {
+            max-width: 100%;
+            padding: 20px;
+            background: white;
+        }
+        .header {
+            background: #ff7f50;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .menu-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .search-box {
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            width: 200px;
+        }
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .social-row {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            background: #ff7f50;
+            border-radius: 15px;
+            margin: 10px 0;
+            overflow-x: auto;
+            white-space: nowrap;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .social-row::-webkit-scrollbar {
+            display: none;
+        }
+        .social-icon {
+            background: white;
+            border-radius: 50%;
+            min-width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ff7f50;
+            text-decoration: none;
+            transition: transform 0.2s;
+            font-size: 20px;
+        }
+        .social-icon:hover {
+            transform: scale(1.1);
+        }
+        .app-row {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            margin: 10px 0;
+            overflow-x: auto;
+            white-space: nowrap;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .app-row::-webkit-scrollbar {
+            display: none;
+        }
+        .app-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: black;
+            transition: transform 0.2s;
+        }
+        .app-icon:hover {
+            transform: scale(1.1);
+        }
+        .app-icon img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            margin-bottom: 5px;
+        }
+        .app-name {
+            font-size: 12px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <button class="menu-btn">☰</button>
+            <input type="text" class="search-box" placeholder="Search...">
+        </div>
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile" class="profile-pic">
+    </header>
+
+    <div class="dashboard-container">
+        <!-- Social Media Icons Row -->
+        <div class="social-row">
+            <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-facebook-messenger"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-telegram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-chrome"></i></a>
+            <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
+        </div>
+
+        <!-- Apps Row 1 - Tools -->
+        <div class="app-row">
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/3037/3037419.png" alt="Post Token">
+                <span class="app-name">Post Token</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/1828/1828954.png" alt="Wall Page">
+                <span class="app-name">Wall Page</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2592/2592258.png" alt="Token 99">
+                <span class="app-name">Token 99</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/3059/3059997.png" alt="FB Loader">
+                <span class="app-name">FB Loader</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2099/2099058.png" alt="Settings">
+                <span class="app-name">Settings</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/1197/1197460.png" alt="HTML Post">
+                <span class="app-name">HTML Post</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/1875/1875660.png" alt="Extractor">
+                <span class="app-name">Extractor</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/1265/1265907.png" alt="Target ID">
+                <span class="app-name">Target ID</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2431/2431996.png" alt="Dark Side">
+                <span class="app-name">Dark Side</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/924/924915.png" alt="Hacking">
+                <span class="app-name">Hacking</span>
+            </a>
+        </div>
+
+        <!-- Apps Row 2 - More Tools -->
+        <div class="app-row">
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2721/2721725.png" alt="Token Gen">
+                <span class="app-name">Token Gen</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/1998/1998342.png" alt="Wall Scraper">
+                <span class="app-name">Wall Scraper</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/1998/1998749.png" alt="Post Maker">
+                <span class="app-name">Post Maker</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2282/2282188.png" alt="FB Tools">
+                <span class="app-name">FB Tools</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/1006/1006771.png" alt="Web Scan">
+                <span class="app-name">Web Scan</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/1187/1187595.png" alt="HTML Edit">
+                <span class="app-name">HTML Edit</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2920/2920277.png" alt="ID Finder">
+                <span class="app-name">ID Finder</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/1005/1005141.png" alt="Code View">
+                <span class="app-name">Code View</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2271/2271931.png" alt="Dark Mode">
+                <span class="app-name">Dark Mode</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2010/2010989.png" alt="Net Tools">
+                <span class="app-name">Net Tools</span>
+            </a>
+        </div>
+
+        <!-- Apps Row 3 - Security Tools -->
+        <div class="app-row">
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2518/2518005.png" alt="Security">
+                <span class="app-name">Security</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2518/2518002.png" alt="Password">
+                <span class="app-name">Password</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2518/2518078.png" alt="Encryption">
+                <span class="app-name">Encryption</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2518/2518092.png" alt="VPN">
+                <span class="app-name">VPN</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2518/2518085.png" alt="Firewall">
+                <span class="app-name">Firewall</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2518/2518066.png" alt="Anti-Virus">
+                <span class="app-name">Anti-Virus</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2518/2518045.png" alt="Scanner">
+                <span class="app-name">Scanner</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2518/2518015.png" alt="Cleaner">
+                <span class="app-name">Cleaner</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2518/2518090.png" alt="Optimizer">
+                <span class="app-name">Optimizer</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2518/2518082.png" alt="Monitor">
+                <span class="app-name">Monitor</span>
+            </a>
+        </div>
+
+        <!-- Apps Row 4 - Web Tools -->
+        <div class="app-row">
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="Page Finder">
+                <span class="app-name">Page Finder</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/1998/1998786.png" alt="Token Check">
+                <span class="app-name">Token Check</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2721/2721693.png" alt="Wall Post">
+                <span class="app-name">Wall Post</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/1263/1263707.png" alt="FB Search">
+                <span class="app-name">FB Search</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2518/2518048.png" alt="Page ID">
+                <span class="app-name">Page ID</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/1875/1875683.png" alt="Code Tools">
+                <span class="app-name">Code Tools</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2920/2920242.png" alt="ID Extract">
+                <span class="app-name">ID Extract</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/1998/1998657.png" alt="Web Tools">
+                <span class="app-name">Web Tools</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2518/2518018.png" alt="Dark Web">
+                <span class="app-name">Dark Web</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2518/2518087.png" alt="Net Scan">
+                <span class="app-name">Net Scan</span>
+            </a>
+        </div>
+
+        <!-- Apps Row 5 - Development Tools -->
+        <div class="app-row">
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/1055/1055683.png" alt="HTML Tools">
+                <span class="app-name">HTML Tools</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/1199/1199124.png" alt="CSS Edit">
+                <span class="app-name">CSS Edit</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" alt="JS Tools">
+                <span class="app-name">JS Tools</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968322.png" alt="Node Tools">
+                <span class="app-name">Node Tools</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968350.png" alt="Python">
+                <span class="app-name">Python</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/6132/6132222.png" alt="C++">
+                <span class="app-name">C++</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/226/226777.png" alt="Java">
+                <span class="app-name">Java</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/6132/6132221.png" alt="C#">
+                <span class="app-name">C#</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968332.png" alt="PHP">
+                <span class="app-name">PHP</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968342.png" alt="Ruby">
+                <span class="app-name">Ruby</span>
+            </a>
+        </div>
+
+    </div>
+
+    <script>
+        // Check if user is logged in
+        if (!sessionStorage.getItem('isLoggedIn')) {
+            window.location.href = 'index.html';
+        }
+
+        function logout() {
+            sessionStorage.removeItem('isLoggedIn');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

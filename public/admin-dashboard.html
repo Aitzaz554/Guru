@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guru App - Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="admin-panel">
+    <div class="admin-container">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="admin-title">
+                <h1>Admin Dashboard</h1>
+                <p id="adminGreeting">Welcome, Admin!</p>
+            </div>
+            <div class="admin-actions">
+                <button class="btn btn-export" onclick="exportUserData()">
+                    <span class="btn-icon">📊</span> Export Data
+                </button>
+                <button class="btn btn-logout" onclick="logout()">
+                    <span class="btn-icon">🚪</span> Logout
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- User Management Section -->
+            <section class="user-management">
+                <div class="filters">
+                    <div class="search-box">
+                        <input type="text" id="searchUsers" placeholder="Search users..." onkeyup="filterUsers()">
+                    </div>
+                    <div class="status-filters">
+                        <button class="filter-btn active" onclick="filterByStatus('all')">All</button>
+                        <button class="filter-btn" onclick="filterByStatus('active')">Active</button>
+                        <button class="filter-btn" onclick="filterByStatus('inactive')">Inactive</button>
+                        <button class="filter-btn" onclick="filterByStatus('pending')">Pending</button>
+                    </div>
+                </div>
+
+                <!-- Users Table -->
+                <div class="table-container">
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th onclick="sortTable(0)">Username ↕</th>
+                                <th onclick="sortTable(1)">Generated Key ↕</th>
+                                <th onclick="sortTable(2)">Status ↕</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <!-- Table rows will be populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Notifications Panel -->
+            <aside class="notifications-panel">
+                <h2>Recent Activities</h2>
+                <div class="notifications-list" id="notificationsList">
+                    <!-- Notifications will be added dynamically -->
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <script>
+        // Session timeout (15 minutes)
+        const SESSION_TIMEOUT = 15 * 60 * 1000;
+        let sessionTimer;
+
+        function resetSessionTimer() {
+            clearTimeout(sessionTimer);
+            sessionTimer = setTimeout(logout, SESSION_TIMEOUT);
+        }
+
+        document.addEventListener('mousemove', resetSessionTimer);
+        document.addEventListener('keypress', resetSessionTimer);
+
+        // Initialize admin dashboard
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if admin is logged in
+            const adminEmail = localStorage.getItem('adminEmail');
+            if (adminEmail !== 'Azharazii91@gmail.com') {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            loadUserData();
+            setupNotifications();
+            resetSessionTimer();
+        });
+
+        function loadUserData() {
+            // Simulated user data - replace with actual API call
+            const users = [
+                { username: 'user1', key: 'GURU-ABC123', status: 'active' },
+                { username: 'user2', key: 'GURU-DEF456', status: 'pending' },
+                { username: 'user3', key: 'GURU-GHI789', status: 'inactive' }
+            ];
+
+            const tbody = document.getElementById('usersTableBody');
+            tbody.innerHTML = users.map(user => `
+                <tr data-status="${user.status}">
+                    <td>${user.username}</td>
+                    <td>${user.key}</td>
+                    <td><span class="status-badge ${user.status}">${user.status}</span></td>
+                    <td>
+                        ${user.status === 'pending' ? 
+                            `<button class="btn btn-activate" onclick="activateUser('${user.username}')">Activate</button>` :
+                            `<button class="btn btn-deactivate" onclick="deactivateUser('${user.username}')">Deactivate</button>`
+                        }
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function setupNotifications() {
+            const notifications = document.getElementById('notificationsList');
+            // Simulated notifications - replace with actual notifications system
+            const recentActivities = [
+                { message: 'New key generated by user2', time: '2 minutes ago' },
+                { message: 'user1 account activated', time: '5 minutes ago' }
+            ];
+
+            notifications.innerHTML = recentActivities.map(activity => `
+                <div class="notification-item">
+                    <p>${activity.message}</p>
+                    <span class="notification-time">${activity.time}</span>
+                </div>
+            `).join('');
+        }
+
+        function filterUsers() {
+            const input = document.getElementById('searchUsers');
+            const filter = input.value.toLowerCase();
+            const rows = document.querySelectorAll('#usersTableBody tr');
+
+            rows.forEach(row => {
+                const username = row.cells[0].textContent.toLowerCase();
+                const key = row.cells[1].textContent.toLowerCase();
+                row.style.display = username.includes(filter) || key.includes(filter) ? '' : 'none';
+            });
+        }
+
+        function filterByStatus(status) {
+            const rows = document.querySelectorAll('#usersTableBody tr');
+            rows.forEach(row => {
+                if (status === 'all' || row.dataset.status === status) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            // Update active filter button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        function sortTable(column) {
+            const table = document.querySelector('.users-table');
+            const rows = Array.from(table.querySelectorAll('tbody tr'));
+            const isAscending = table.querySelector(`th:nth-child(${column + 1})`).classList.contains('asc');
+
+            rows.sort((a, b) => {
+                const aValue = a.cells[column].textContent.toLowerCase();
+                const bValue = b.cells[column].textContent.toLowerCase();
+                return isAscending ? bValue.localeCompare(aValue) : aValue.localeCompare(bValue);
+            });
+
+            table.querySelectorAll('th').forEach(th => th.classList.remove('asc', 'desc'));
+            table.querySelector(`th:nth-child(${column + 1})`).classList.add(isAscending ? 'desc' : 'asc');
+
+            const tbody = table.querySelector('tbody');
+            tbody.innerHTML = '';
+            rows.forEach(row => tbody.appendChild(row));
+        }
+
+        function exportUserData() {
+            const rows = document.querySelectorAll('#usersTableBody tr');
+            let csv = 'Username,Generated Key,Status\n';
+            
+            rows.forEach(row => {
+                const username = row.cells[0].textContent;
+                const key = row.cells[1].textContent;
+                const status = row.cells[2].textContent;
+                csv += `${username},${key},${status}\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'guru-app-users.csv';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        function activateUser(username) {
+            // Replace with actual API call
+            console.log(`Activating user: ${username}`);
+            addNotification(`${username} account activated`);
+            loadUserData(); // Reload table
+        }
+
+        function deactivateUser(username) {
+            // Replace with actual API call
+            console.log(`Deactivating user: ${username}`);
+            addNotification(`${username} account deactivated`);
+            loadUserData(); // Reload table
+        }
+
+        function addNotification(message) {
+            const notifications = document.getElementById('notificationsList');
+            const notification = document.createElement('div');
+            notification.className = 'notification-item';
+            notification.innerHTML = `
+                <p>${message}</p>
+                <span class="notification-time">Just now</span>
+            `;
+            notifications.insertBefore(notification, notifications.firstChild);
+        }
+
+        function logout() {
+            localStorage.removeItem('adminEmail');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

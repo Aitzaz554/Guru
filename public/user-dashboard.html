@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guru App Store</title>
+    <link rel="stylesheet" href="advanced-dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .app-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            width: 100%;
+        }
+
+        .app-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(31, 38, 135, 0.15);
+        }
+
+        .app-icon {
+            background: linear-gradient(45deg, #4361ee, #3f37c9);
+            color: white;
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .app-details {
+            flex: 1;
+        }
+
+        .app-details h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .app-details p {
+            color: #6c757d;
+            margin-bottom: 1rem;
+        }
+
+        .app-features {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .feature-badge {
+            background: rgba(67, 97, 238, 0.1);
+            color: #4361ee;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .launch-btn {
+            background: linear-gradient(45deg, #4361ee, #3f37c9);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .launch-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+            color: white;
+        }
+
+        #loadingOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(5px);
+        }
+
+        .loading-content {
+            text-align: center;
+            color: white;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #4361ee;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .html-checker-icon {
+            background: linear-gradient(45deg, #ff6b6b, #ee5253) !important;
+        }
+
+        .windsurf-icon {
+            background: linear-gradient(45deg, #4361ee, #3f37c9) !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Search Header -->
+            <header class="app-header">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search Guru Store apps" aria-label="Search apps" id="searchInput">
+                </div>
+                <div class="header-actions">
+                    <button class="header-btn">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <button class="header-btn">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                    <img src="https://api.dicebear.com/6.x/micah/svg?seed=Felix" alt="Profile" class="profile-avatar">
+                </div>
+            </header>
+
+            <!-- Categories Nav -->
+            <nav class="categories-nav">
+                <button class="category-btn active" data-category="all">All</button>
+                <button class="category-btn" data-category="communication">Communication</button>
+                <button class="category-btn" data-category="social">Social</button>
+                <button class="category-btn" data-category="security">Security</button>
+                <button class="category-btn" data-category="development">Development</button>
+                <button class="category-btn" data-category="tools">Tools</button>
+                <button class="category-btn" data-category="documents">Documents</button>
+                <button class="category-btn" data-category="files">Files</button>
+            </nav>
+
+            <!-- Apps Grid -->
+            <div class="apps-grid" id="appsGrid">
+                <!-- HTML Checker App Card -->
+                <div class="app-card" data-aos="fade-up">
+                    <div class="app-icon html-checker-icon">
+                        <i class="fas fa-code-branch fa-2x"></i>
+                    </div>
+                    <div class="app-details">
+                        <h3>HTML Checker</h3>
+                        <p>Advanced HTML Code Analysis & History</p>
+                        <div class="app-features">
+                            <span class="feature-badge">
+                                <i class="fas fa-history"></i> 12min Updates
+                            </span>
+                            <span class="feature-badge">
+                                <i class="fas fa-clock"></i> 1 Month Active
+                            </span>
+                            <span class="feature-badge">
+                                <i class="fas fa-code"></i> Code Analysis
+                            </span>
+                        </div>
+                        <a href="../Windsurf/html-checker.html" class="launch-btn" onclick="showLoadingOverlay('html-checker')">
+                            <i class="fas fa-microscope"></i> Open Checker
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Windsurf App Card -->
+                <div class="app-card" data-aos="fade-up">
+                    <div class="app-icon windsurf-icon">
+                        <i class="fas fa-wind fa-2x"></i>
+                    </div>
+                    <div class="app-details">
+                        <h3>Windsurf</h3>
+                        <p>Post Management System</p>
+                        <div class="app-features">
+                            <span class="feature-badge">
+                                <i class="fas fa-edit"></i> Post Editor
+                            </span>
+                            <span class="feature-badge">
+                                <i class="fas fa-comments"></i> Comments
+                            </span>
+                            <span class="feature-badge">
+                                <i class="fas fa-tasks"></i> Status Tracking
+                            </span>
+                        </div>
+                        <a href="../Windsurf/index.html" class="launch-btn" onclick="showLoadingOverlay('windsurf')">
+                            <i class="fas fa-rocket"></i> Launch App
+                        </a>
+                    </div>
+                </div>
+                <!-- Apps will be dynamically added here -->
+            </div>
+
+            <!-- Coming Soon Modal -->
+            <div id="appModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="app-preview">
+                            <div class="modal-app-icon">
+                                <i id="modalAppIcon"></i>
+                            </div>
+                            <div class="modal-app-info">
+                                <h2 id="modalTitle"></h2>
+                                <p id="modalCategory"></p>
+                            </div>
+                        </div>
+                        <button class="close-btn" onclick="closeModal('appModal')">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="coming-soon-message">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                            <h3>Coming Soon!</h3>
+                            <p id="coming-soon-message">This project is coming soon!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h3>Loading...</h3>
+            <p>Please wait while we prepare your workspace</p>
+        </div>
+    </div>
+
+    <script>
+        // App data
+        const apps = [
+            // Communication Apps
+            { icon: 'fa-solid fa-comments', name: 'CONVO', category: 'Communication', separator: 'Communication Apps' },
+            { icon: 'fa-solid fa-comment-dots', name: 'WALL', category: 'Communication' },
+            { icon: 'fa-solid fa-message', name: 'MESSENGER', category: 'Communication' },
+            { icon: 'fa-solid fa-comments', name: 'CONVO PRO', category: 'Communication' },
+            { icon: 'fa-solid fa-comment-dots', name: 'CHAT PRO', category: 'Communication' },
+            { icon: 'fa-solid fa-comment', name: 'QUICK CHAT', category: 'Communication' },
+            { icon: 'fa-solid fa-comments', name: 'GROUP CHAT', category: 'Communication' },
+            { icon: 'fa-solid fa-message', name: 'CHAT MASTER', category: 'Communication' },
+            
+            // Social Apps
+            { icon: 'fa-solid fa-paper-plane', name: 'POST', category: 'Social', separator: 'Social Apps' },
+            { icon: 'fa-solid fa-share-nodes', name: 'SHARE PRO', category: 'Social' },
+            { icon: 'fa-solid fa-users', name: 'GROUP', category: 'Social' },
+            { icon: 'fa-solid fa-heart', name: 'LIKES', category: 'Social' },
+            { icon: 'fa-solid fa-user-group', name: 'FRIENDS', category: 'Social' },
+            { icon: 'fa-solid fa-share', name: 'SHARE MASTER', category: 'Social' },
+            { icon: 'fa-solid fa-thumbs-up', name: 'LIKE PRO', category: 'Social' },
+            { icon: 'fa-solid fa-users', name: 'COMMUNITY', category: 'Social' },
+            
+            // Security Apps
+            { icon: 'fa-solid fa-key', name: 'TOKEN', category: 'Security', separator: 'Security Apps' },
+            { icon: 'fa-solid fa-key', name: 'PAGE TOKEN', category: 'Security' },
+            { icon: 'fa-solid fa-shield-check', name: 'FILE CHECKER', category: 'Security' },
+            { icon: 'fa-solid fa-lock', name: 'APP LOCK', category: 'Security' },
+            { icon: 'fa-solid fa-shield', name: 'GUARD', category: 'Security' },
+            { icon: 'fa-solid fa-user-shield', name: 'USER GUARD', category: 'Security' },
+            { icon: 'fa-solid fa-fingerprint', name: 'ID CHECK', category: 'Security' },
+            { icon: 'fa-solid fa-shield-halved', name: 'SECURE PRO', category: 'Security' },
+            { icon: 'fa-solid fa-key', name: 'KEY MASTER', category: 'Security' },
+            { icon: 'fa-solid fa-lock', name: 'LOCK PRO', category: 'Security' },
+            
+            // Development Apps
+            { icon: 'fa-solid fa-code', name: 'HTML', category: 'Development', separator: 'Development Apps' },
+            { icon: 'fa-solid fa-code-branch', name: 'POST HTML', category: 'Development' },
+            { icon: 'fa-solid fa-file-code', name: 'CODE EDITOR', category: 'Development' },
+            { icon: 'fa-solid fa-terminal', name: 'CODE PRO', category: 'Development' },
+            { icon: 'fa-solid fa-code', name: 'DEV TOOLS', category: 'Development' },
+            { icon: 'fa-solid fa-laptop-code', name: 'CODE MASTER', category: 'Development' },
+            { icon: 'fa-solid fa-bug', name: 'DEBUG PRO', category: 'Development' },
+            { icon: 'fa-solid fa-code-compare', name: 'CODE COMPARE', category: 'Development' },
+            
+            // Tools Apps
+            { icon: 'fa-solid fa-spinner', name: 'LODER', category: 'Tools', separator: 'Tools Apps' },
+            { icon: 'fa-solid fa-bell', name: 'NOTIFY', category: 'Tools' },
+            { icon: 'fa-solid fa-gear', name: 'SETTINGS', category: 'Tools' },
+            { icon: 'fa-solid fa-wrench', name: 'TOOLS PRO', category: 'Tools' },
+            { icon: 'fa-solid fa-screwdriver-wrench', name: 'TOOLKIT', category: 'Tools' },
+            { icon: 'fa-solid fa-toolbox', name: 'TOOL MASTER', category: 'Tools' },
+            { icon: 'fa-solid fa-sliders', name: 'CONTROLS', category: 'Tools' },
+            { icon: 'fa-solid fa-gauge', name: 'SPEED TEST', category: 'Tools' },
+            
+            // Document Apps
+            { icon: 'fa-solid fa-file', name: 'PAGE', category: 'Documents', separator: 'Document Apps' },
+            { icon: 'fa-solid fa-file-lines', name: 'TEXT EDITOR', category: 'Documents' },
+            { icon: 'fa-solid fa-file-pdf', name: 'PDF VIEWER', category: 'Documents' },
+            { icon: 'fa-solid fa-file-word', name: 'WORD PRO', category: 'Documents' },
+            { icon: 'fa-solid fa-file-excel', name: 'EXCEL PRO', category: 'Documents' },
+            { icon: 'fa-solid fa-file-powerpoint', name: 'SLIDES PRO', category: 'Documents' },
+            { icon: 'fa-solid fa-file-image', name: 'IMAGE VIEWER', category: 'Documents' },
+            { icon: 'fa-solid fa-file-video', name: 'VIDEO PLAYER', category: 'Documents' },
+            
+            // File Management Apps
+            { icon: 'fa-solid fa-folder', name: 'FILE MANAGER', category: 'Files', separator: 'File Management Apps' },
+            { icon: 'fa-solid fa-folder-open', name: 'FILE PRO', category: 'Files' },
+            { icon: 'fa-solid fa-copy', name: 'FILE COPY', category: 'Files' },
+            { icon: 'fa-solid fa-folder-tree', name: 'FILE TREE', category: 'Files' },
+            { icon: 'fa-solid fa-folder-plus', name: 'ADD FILES', category: 'Files' },
+            { icon: 'fa-solid fa-folder-minus', name: 'REMOVE FILES', category: 'Files' },
+            { icon: 'fa-solid fa-folder-open', name: 'EXPLORER', category: 'Files' },
+            { icon: 'fa-solid fa-folder', name: 'ORGANIZER', category: 'Files' },
+            
+            // Extra Tools
+            { icon: 'fa-solid fa-clock', name: 'TIME PRO', category: 'Tools', separator: 'Extra Tools' },
+            { icon: 'fa-solid fa-calendar', name: 'CALENDAR', category: 'Tools' },
+            { icon: 'fa-solid fa-calculator', name: 'CALCULATOR', category: 'Tools' },
+            { icon: 'fa-solid fa-compass', name: 'NAVIGATOR', category: 'Tools' },
+            { icon: 'fa-solid fa-map', name: 'MAP PRO', category: 'Tools' },
+            { icon: 'fa-solid fa-camera', name: 'CAMERA PRO', category: 'Tools' },
+            { icon: 'fa-solid fa-video', name: 'VIDEO PRO', category: 'Tools' },
+            { icon: 'fa-solid fa-image', name: 'IMAGE PRO', category: 'Tools' },
+            
+            // Pro Tools
+            { icon: 'fa-solid fa-wand-magic', name: 'MAGIC PRO', category: 'Tools', separator: 'Pro Tools' },
+            { icon: 'fa-solid fa-paint-brush', name: 'PAINT PRO', category: 'Tools' },
+            { icon: 'fa-solid fa-pen', name: 'DRAW PRO', category: 'Tools' },
+            { icon: 'fa-solid fa-crop', name: 'CROP PRO', category: 'Tools' },
+            { icon: 'fa-solid fa-fill', name: 'FILL PRO', category: 'Tools' },
+            { icon: 'fa-solid fa-palette', name: 'COLOR PRO', category: 'Tools' },
+            { icon: 'fa-solid fa-brush', name: 'BRUSH PRO', category: 'Tools' },
+            { icon: 'fa-solid fa-wand-sparkles', name: 'EFFECTS PRO', category: 'Tools' }
+        ];
+
+        // Function to create app card with separator
+        function createAppCard(app) {
+            const card = document.createElement('div');
+            
+            // If app has separator, create it
+            if (app.separator) {
+                const separator = document.createElement('div');
+                separator.className = 'category-separator';
+                separator.innerHTML = `
+                    <h2>${app.separator}</h2>
+                    <div class="separator-line"></div>
+                `;
+                card.appendChild(separator);
+            }
+            
+            // Create the app card
+            const appCard = document.createElement('div');
+            appCard.className = 'app-card';
+            
+            // Generate random gradient
+            const gradients = [
+                'linear-gradient(135deg, #FF6B6B, #FF8E8E)',
+                'linear-gradient(135deg, #4ECDC4, #45B7AF)',
+                'linear-gradient(135deg, #96E6A1, #7BC990)',
+                'linear-gradient(135deg, #FEC163, #DE9E48)',
+                'linear-gradient(135deg, #F7D794, #E3C275)',
+                'linear-gradient(135deg, #786FA6, #574B90)',
+                'linear-gradient(135deg, #F8A5C2, #E77F9C)',
+                'linear-gradient(135deg, #778BEB, #546DE5)',
+                'linear-gradient(135deg, #63CDDA, #3DC1D3)',
+                'linear-gradient(135deg, #CF6A87, #B44C6F)',
+                'linear-gradient(135deg, #FDA7DF, #D980FA)',
+                'linear-gradient(135deg, #4834D4, #686DE0)',
+                'linear-gradient(135deg, #22A6B3, #7ED6DF)',
+                'linear-gradient(135deg, #E056FD, #BE2EDD)'
+            ];
+            const randomGradient = gradients[Math.floor(Math.random() * gradients.length)];
+            
+            appCard.innerHTML = `
+                <div class="app-icon" style="background: ${randomGradient}">
+                    <i class="${app.icon}" style="font-size: 45px; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.1);"></i>
+                    <div class="lock-icon">
+                        <i class="fa-solid fa-lock" style="font-size: 16px;"></i>
+                    </div>
+                </div>
+                <div class="app-info">
+                    <h3>${app.name}</h3>
+                    <button class="install-btn">GET</button>
+                </div>
+            `;
+            
+            appCard.addEventListener('click', () => {
+                showComingSoonModal(app);
+            });
+            
+            card.appendChild(appCard);
+            return card;
+        }
+
+        // Function to show coming soon modal
+        function showComingSoonModal(app) {
+            const modal = document.getElementById('appModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalCategory = document.getElementById('modalCategory');
+            const modalMessage = document.querySelector('.coming-soon-message p');
+            
+            modalTitle.textContent = app.name;
+            modalCategory.textContent = app.category;
+            modalMessage.textContent = "This project is coming soon!";
+            modal.style.display = 'flex';
+        }
+
+        // Function to filter apps
+        function filterApps(category) {
+            const appsGrid = document.querySelector('.apps-grid');
+            appsGrid.innerHTML = '';
+            
+            const filteredApps = category === 'all' 
+                ? apps 
+                : apps.filter(app => app.category.toLowerCase() === category.toLowerCase());
+            
+            filteredApps.forEach(app => {
+                appsGrid.appendChild(createAppCard(app));
+            });
+        }
+
+        // Function to search apps
+        function searchApps(query) {
+            const appsGrid = document.querySelector('.apps-grid');
+            appsGrid.innerHTML = '';
+            
+            const searchedApps = apps.filter(app => 
+                app.name.toLowerCase().includes(query.toLowerCase()) ||
+                app.category.toLowerCase().includes(query.toLowerCase())
+            );
+            
+            searchedApps.forEach(app => {
+                appsGrid.appendChild(createAppCard(app));
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial app load
+            filterApps('all');
+            
+            // Category buttons
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    e.target.classList.add('active');
+                    filterApps(e.target.dataset.category);
+                });
+            });
+            
+            // Search input
+            const searchInput = document.querySelector('.search-bar input');
+            searchInput.addEventListener('input', (e) => {
+                searchApps(e.target.value);
+            });
+            
+            // Modal close button
+            const closeBtn = document.querySelector('.close-btn');
+            closeBtn.addEventListener('click', () => {
+                document.getElementById('appModal').style.display = 'none';
+            });
+        });
+    </script>
+
+    <script>
+        function showLoadingOverlay(app) {
+            const overlay = document.getElementById('loadingOverlay');
+            const loadingText = overlay.querySelector('h3');
+            const loadingDesc = overlay.querySelector('p');
+            
+            if (app === 'html-checker') {
+                loadingText.textContent = 'Loading HTML Checker...';
+                loadingDesc.textContent = 'Preparing code analysis tools';
+                setTimeout(() => {
+                    window.location.href = '../Windsurf/html-checker.html';
+                }, 2000);
+            } else {
+                loadingText.textContent = 'Loading Windsurf App...';
+                loadingDesc.textContent = 'Please wait while we prepare your workspace';
+                setTimeout(() => {
+                    window.location.href = '../Windsurf/index.html';
+                }, 2000);
+            }
+            
+            overlay.style.display = 'flex';
+        }
+    </script>
+</body>
+</html>

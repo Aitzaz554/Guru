@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windsurf - Cheaser Post</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1c2e, #2a2d4a);
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .button {
+            background: linear-gradient(45deg, #007bff, #00bfff);
+            color: white;
+            padding: 12px 24px;
+            text-align: center;
+            margin: 10px;
+            text-decoration: none;
+            border-radius: 25px;
+            display: inline-block;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+        }
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+        }
+        .output {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            font-weight: 500;
+            color: #fff;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Cheaser Post</h1>
+
+    <p>Click the buttons below:</p>
+    
+    <a href="#" class="button" onclick="showComment();">Np</a>
+    <a href="#" class="button" onclick="showTime();">Time</a>
+    <a href="#" class="button" onclick="showCmd();">Cmd</a>
+    
+    <div class="output" id="output"></div>
+
+    <script>
+        function showComment() {
+            const commentText = '🩷#___𝗦𝗼𝘂𝗿𝗮𝘃__𝗧𝗶𝘄𝗮𝗿𝗶__𝗨𝗿𝗳__𝗕𝗵𝗶𝗸_𝗣𝗶𝗹𝗹𝗲__𝗣𝗹𝘂𝘀___𝗖𝗵𝘂𝟳𝗱𝟵𝗿𝗸__𝗟𝟵𝗻𝗴𝗱𝟯__𝗣𝗶𝗹𝗹𝗼__𝗞𝗶𝗶_𝗟𝟵𝗻𝗴𝗱𝟯__𝗣𝗶𝗹𝗹𝗼__𝗞𝗶𝗶__ 🖤 ___𝗕𝗵𝟯𝗻__𝗞𝗶__("")___🤍__𝗞𝗮___𝗖𝗵𝟵𝗿𝗺𝗶𝗶𝗻𝟵𝗿___𝗕𝗻𝟵𝗻__𝗛𝟯𝘄𝗿___________😈 ___𝗛𝟯𝘄𝗿____________ 🩵 #____𝗖𝗛𝟵𝗦𝟯𝗥___𝗥𝗨𝗟𝟯𝗫____💚___𝗢𝗡___𝗙𝗜𝗥𝟯__ 🦈 __ ❤';
+            document.getElementById('output').innerText = commentText;
+        }
+
+        function showTime() {
+            const currentDate = new Date();
+            const dateString = `Date: ${currentDate.getDate()} ${currentDate.toLocaleString('default', { month: 'long' })} ${currentDate.getFullYear()}`;
+            const timeString = `Time: ${currentDate.getHours()}:${String(currentDate.getMinutes()).padStart(2, '0')} ${currentDate.getHours() >= 12 ? 'PM' : 'AM'}`;
+            document.getElementById('output').innerText = dateString + '\n' + timeString;
+        }
+
+        function showCmd() {
+            const cmdInstructions = `1. Start - Enter your Comment.\n2. Stop - Displays the date and time when stopped.\n3. For comment limit, type 'Limit'.`;
+            document.getElementById('output').innerText = cmdInstructions;
+
+            const newCmd = prompt("Enter Command (e.g., Start, Stop, Limit):").toLowerCase();
+            if (newCmd.includes("start")) {
+                const startDate = 'Date: 29 October 2024, Time: 2:29 PM';
+                document.getElementById('output').innerText = startDate + " - Start your Comment";
+            } else if (newCmd.includes("stop")) {
+                const stopDate = 'Date: 1 January 2024, Time: 9:42 AM';
+                document.getElementById('output').innerText = stopDate;
+            } else if (newCmd.includes("limit")) {
+                const limitText = 'Comment Limit: 1 min like 223 days; you can still comment.';
+                document.getElementById('output').innerText = limitText;
+            } else {
+                document.getElementById('output').innerText = "Unknown command!";
+            }
+        }
+    </script>
+</div>
+
+</body>
+</html>

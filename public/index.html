@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aitzaz App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <h1 class="loading-title">Aitzaz App</h1>
+            <div class="progress-bar">
+                <div class="progress" id="progressBar"></div>
+            </div>
+            <p class="loading-text">Initializing system...</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <div class="container">
+            <!-- Header -->
+            <header class="header">
+                <h1 class="app-title">Aitzaz App</h1>
+                <p class="app-subtitle">Welcome to the Ultimate Subscription Manager</p>
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search apps...">
+                    <button onclick="searchApps()" class="search-button">
+                        <span class="btn-icon">🔍</span>
+                        Search
+                    </button>
+                </div>
+            </header>
+
+            <!-- Main Buttons -->
+            <div class="button-container">
+                <button class="btn btn-admin" onclick="showModal('adminModal')">
+                    <span class="btn-icon">👤</span>
+                    Admin Panel
+                </button>
+                <button class="btn btn-user" onclick="showModal('userModal')">
+                    <span class="btn-icon">🔑</span>
+                    User Panel
+                </button>                                                                                                                                                                                                                                                                           
+            </div>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <p>Need help? Contact Support at <a href="mailto:Azharazii91@gmail.com">Azharazii91@gmail.com</a></p>
+            </footer>
+        </div>
+
+        <!-- Admin Login Modal -->
+        <div id="adminModal" class="modal">
+            <div class="modal-content">
+                <form id="adminLoginForm" onsubmit="event.preventDefault(); handleAdminLogin()">
+                    <h2>Admin Login</h2>
+                    <div class="form-group">
+                        <input type="email" id="adminEmail" class="form-control" placeholder="Enter admin email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="adminPassword" class="form-control" placeholder="Enter password" required>
+                    </div>
+                    <div class="error-message" id="adminError"></div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('adminModal')">Close</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- User Login Modal -->
+        <div id="userModal" class="modal">
+            <div class="modal-content">
+                <h2>User Login</h2>
+                <form id="userLoginForm">
+                    <div class="form-group">
+                        <input type="text" id="userUsername" class="form-control" placeholder="Username" value="admin" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="userPassword" class="form-control" placeholder="Password" value="admin" required>
+                    </div>
+                    <div class="error-message" id="userError"></div>
+                    <button type="button" class="btn btn-primary" onclick="handleUserLogin()">Login</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('userModal')">Close</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Key Display Modal -->
+        <div id="keyModal" class="modal">
+            <div class="modal-content">
+                <h2>Your Generated Key</h2>
+                <div class="key-container">
+                    <input type="text" id="generatedKey" class="form-control" readonly>
+                    <button class="btn btn-copy" onclick="copyKey()">
+                        <span class="btn-icon">📋</span>
+                        Copy Key
+                    </button>
+                </div>
+                <p class="key-instructions">Share this key with the admin for activation</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Voice synthesis setup
+        const synth = window.speechSynthesis;
+        let voices = [];
+
+        function loadVoices() {
+            voices = synth.getVoices();
+        }
+
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = loadVoices;
+        }
+
+        function speak(text, accent) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.voice = voices.find(voice => voice.lang === (accent === 'US' ? 'en-US' : 'en-GB'));
+            utterance.rate = 0.9;
+            synth.speak(utterance);
+        }
+
+        // Loading animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const loadingScreen = document.getElementById('loadingScreen');
+            const mainContent = document.getElementById('mainContent');
+            const progressBar = document.getElementById('progressBar');
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 2;
+                progressBar.style.width = `${progress}%`;
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        loadingScreen.style.opacity = '0';
+                        mainContent.style.display = 'block';
+                        setTimeout(() => {
+                            loadingScreen.style.display = 'none';
+                            mainContent.style.opacity = '1';
+                            // Play welcome message
+                            speak("Hello Guys! My Name is Aitzaz. Welcome to our app! Let's get started!", 'US');
+                            // Play reboot sound
+                            playRebootSound();
+                        }, 500);
+                    }, 500);
+                }
+            }, 50);
+        });
+
+        // Admin login handler
+        function handleAdminLogin() {
+            const email = document.getElementById('adminEmail').value;
+            const password = document.getElementById('adminPassword').value;
+            const errorDiv = document.getElementById('adminError');
+
+            if (email === 'Azharazii91@gmail.com' && password === 'Azhar5547@@') {
+                window.location.href = '/admin-dashboard.html';
+            } else {
+                errorDiv.textContent = 'Invalid email or password';
+                errorDiv.style.display = 'block';
+            }
+        }
+
+        // User login handler
+        function handleUserLogin() {
+            const username = document.getElementById('userUsername').value;
+            const password = document.getElementById('userPassword').value;
+            
+            if (username === 'admin' && password === 'admin') {
+                // Store login status
+                sessionStorage.setItem('isLoggedIn', 'true');
+                sessionStorage.setItem('username', username);
+                // Redirect to dashboard
+                window.location.href = 'dashboard.html';
+            } else {
+                // Login failed
+                document.getElementById('userError').textContent = 'Invalid username or password';
+            }
+        }
+
+        function generateKey() {
+            return 'Aitzaz-' + Math.random().toString(36).substring(2, 15).toUpperCase();
+        }
+
+        function copyKey() {
+            const keyInput = document.getElementById('generatedKey');
+            keyInput.select();
+            document.execCommand('copy');
+            alert('Key copied to clipboard!');
+        }
+
+        function showModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function searchApps() {
+            // TO DO: implement search functionality
+        }
+
+        function searchUserApps() {
+            const searchInput = document.getElementById('userAppSearch');
+            const appsGrid = document.getElementById('appsGrid');
+            const searchQuery = searchInput.value.toLowerCase();
+
+            const appCards = appsGrid.children;
+            for (let i = 0; i < appCards.length; i++) {
+                const appName = appCards[i].getAttribute('data-app-name').toLowerCase();
+                if (appName.includes(searchQuery)) {
+                    appCards[i].style.display = 'block';
+                } else {
+                    appCards[i].style.display = 'none';
+                }
+            }
+        }
+    </script>
+    <script src="js/voice.js"></script>
+    <script src="audio/reboot.js"></script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+8<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windsurf Folder</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1c2e, #2a2d4a);
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            text-align: center;
+            color: #1a1c2e;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .post {
+            margin: 30px 0;
+            padding: 25px;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #2a2d4a;
+            margin: 0 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        h2 i {
+            color: #007bff;
+        }
+        .button {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 12px 20px;
+            text-align: center;
+            display: inline-block;
+            margin: 10px 0;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,123,255,0.3);
+        }
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,123,255,0.4);
+            background: linear-gradient(135deg, #0056b3, #004494);
+        }
+        .comment-section {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: none;
+        }
+        .comment-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        .comment-section p {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+        .comment-section strong {
+            color: #0056b3;
+        }
+        .status {
+            padding: 8px 16px;
+            border-radius: 6px;
+            display: inline-block;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+        .status.complete {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1><i class="fas fa-folder-open"></i> Windsurf Folder</h1>
+
+    <div class="post">
+        <h2><i class="fas fa-code"></i> Cheaser HTML</h2>
+        <button onclick="toggleSection('cheaser')" class="button">
+            <i class="fas fa-eye"></i> View Cheaser HTML Post
+        </button>
+        <div id="cheaser" class="comment-section">
+            <p><strong><i class="far fa-calendar"></i> Date:</strong> 27 October 2024</p>
+            <p><strong><i class="far fa-clock"></i> Time:</strong> 09:42 AM</p>
+            <p><strong><i class="far fa-comment"></i> Comment:</strong> Ya comment ah ra hai</p>
+            <div class="status pending">
+                <i class="fas fa-hourglass-half"></i> Status: Pending (Last updated: 01 January 2025, 01:45 PM)
+            </div>
+        </div>
+    </div>
+
+    <div class="post">
+        <h2><i class="fas fa-dragon"></i> Dargon</h2>
+        <button onclick="toggleSection('dargon')" class="button">
+            <i class="fas fa-eye"></i> View Dargon Post
+        </button>
+        <div id="dargon" class="comment-section">
+            <p><strong><i class="far fa-calendar"></i> Date:</strong> 24 January 2025</p>
+            <p><strong><i class="far fa-clock"></i> Time:</strong> 10:00 PM</p>
+            <p><strong><i class="far fa-comment"></i> Comment:</strong> New dragon project started</p>
+            <div class="status pending">
+                <i class="fas fa-hourglass-half"></i> Status: In Progress
+            </div>
+        </div>
+    </div>
+
+    <div class="post">
+        <h2><i class="fas fa-vial"></i> Aitzaz Testing</h2>
+        <button onclick="toggleSection('aitzaz')" class="button">
+            <i class="fas fa-eye"></i> View Aitzaz Testing Post
+        </button>
+        <div id="aitzaz" class="comment-section">
+            <p><strong><i class="far fa-calendar"></i> Date:</strong> 24 January 2025</p>
+            <p><strong><i class="far fa-clock"></i> Time:</strong> 10:15 PM</p>
+            <p><strong><i class="far fa-comment"></i> Comment:</strong> Testing new features</p>
+            <div class="status complete">
+                <i class="fas fa-check-circle"></i> Status: Testing Complete
+            </div>
+        </div>
+    </div>
+
+    <div class="post">
+        <h2><i class="fas fa-server"></i> Nonstop Work Server</h2>
+        <button onclick="toggleSection('nonstop')" class="button">
+            <i class="fas fa-eye"></i> View Nonstop Work Server Post
+        </button>
+        <div id="nonstop" class="comment-section">
+            <p><strong><i class="far fa-calendar"></i> Date:</strong> 24 January 2025</p>
+            <p><strong><i class="far fa-clock"></i> Time:</strong> 10:30 PM</p>
+            <p><strong><i class="far fa-comment"></i> Comment:</strong> Server running 24/7</p>
+            <div class="status complete">
+                <i class="fas fa-check-circle"></i> Status: Active
+            </div>
+        </div>
+    </div>
+
+    <div class="post">
+        <h2><i class="fas fa-code"></i> HTML Wally</h2>
+        <button onclick="toggleSection('htmlwally')" class="button">
+            <i class="fas fa-eye"></i> View HTML Wally Post
+        </button>
+        <div id="htmlwally" class="comment-section">
+            <p><strong><i class="far fa-calendar"></i> Date:</strong> 24 January 2025</p>
+            <p><strong><i class="far fa-clock"></i> Time:</strong> 10:45 PM</p>
+            <p><strong><i class="far fa-comment"></i> Comment:</strong> Wall project development</p>
+            <div class="status pending">
+                <i class="fas fa-hourglass-half"></i> Status: Under Development
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleSection(id) {
+    const section = document.getElementById(id);
+    const allSections = document.querySelectorAll('.comment-section');
+    
+    // Close all other sections
+    allSections.forEach(s => {
+        if (s.id !== id && s.classList.contains('active')) {
+            s.classList.remove('active');
+        }
+    });
+    
+    // Toggle current section
+    section.classList.toggle('active');
+}
+</script>
+
+</body>
+</html>

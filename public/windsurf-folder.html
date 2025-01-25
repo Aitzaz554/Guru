@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windsurf Folder</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1c2e, #2a2d4a);
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            text-align: center;
+            color: #1a1c2e;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .post {
+            margin: 30px 0;
+            padding: 25px;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #2a2d4a;
+            margin: 0 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        h2 i {
+            color: #007bff;
+        }
+        .button {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 12px 20px;
+            text-align: center;
+            display: inline-block;
+            margin: 10px 0;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,123,255,0.3);
+        }
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,123,255,0.4);
+            background: linear-gradient(135deg, #0056b3, #004494);
+        }
+        .comment-section {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: none;
+        }
+        .comment-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        .comment-section p {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+        .comment-section strong {
+            color: #0056b3;
+        }
+        .status {
+            padding: 8px 16px;
+            border-radius: 6px;
+            display: inline-block;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+        .status.complete {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .cheaser-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .command-input {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .cheaser-output {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            min-height: 50px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1><i class="fas fa-folder-open"></i> Windsurf Folder</h1>
+
+    <div class="post">
+        <h2><i class="fas fa-terminal"></i> CMD Console</h2>
+        <button class="button" onclick="toggleCmd()">
+            <i class="fas fa-terminal"></i> Open CMD
+        </button>
+        <div id="cheaser" class="comment-section">
+            <input id="commandInput" type="text" placeholder="Enter command (type 'help' for commands)" class="command-input" onkeypress="handleKeyPress(event)">
+            <div id="output" class="cheaser-output"></div>
+        </div>
+    </div>
+
+    <div class="post">
+        <h2><i class="fas fa-dragon"></i> Dargon</h2>
+        <button onclick="toggleSection('dargon')" class="button">
+            <i class="fas fa-eye"></i> View Dargon Post
+        </button>
+        <div id="dargon" class="comment-section">
+            <p><strong><i class="far fa-calendar"></i> Date:</strong> 24 January 2025</p>
+            <p><strong><i class="far fa-clock"></i> Time:</strong> 10:00 PM</p>
+            <p><strong><i class="far fa-comment"></i> Comment:</strong> New dragon project started</p>
+            <div class="status pending">
+                <i class="fas fa-hourglass-half"></i> Status: In Progress
+            </div>
+        </div>
+    </div>
+
+    <div class="post">
+        <h2><i class="fas fa-vial"></i> Aitzaz Testing</h2>
+        <button onclick="toggleSection('aitzaz')" class="button">
+            <i class="fas fa-eye"></i> View Aitzaz Testing Post
+        </button>
+        <div id="aitzaz" class="comment-section">
+            <p><strong><i class="far fa-calendar"></i> Date:</strong> 24 January 2025</p>
+            <p><strong><i class="far fa-clock"></i> Time:</strong> 10:15 PM</p>
+            <p><strong><i class="far fa-comment"></i> Comment:</strong> Testing new features</p>
+            <div class="status complete">
+                <i class="fas fa-check-circle"></i> Status: Testing Complete
+            </div>
+        </div>
+    </div>
+
+    <div class="post">
+        <h2><i class="fas fa-server"></i> Nonstop Work Server</h2>
+        <button onclick="toggleSection('nonstop')" class="button">
+            <i class="fas fa-eye"></i> View Nonstop Work Server Post
+        </button>
+        <div id="nonstop" class="comment-section">
+            <p><strong><i class="far fa-calendar"></i> Date:</strong> 24 January 2025</p>
+            <p><strong><i class="far fa-clock"></i> Time:</strong> 10:30 PM</p>
+            <p><strong><i class="far fa-comment"></i> Comment:</strong> Server running 24/7</p>
+            <div class="status complete">
+                <i class="fas fa-check-circle"></i> Status: Active
+            </div>
+        </div>
+    </div>
+
+    <div class="post">
+        <h2><i class="fas fa-code"></i> HTML Wally</h2>
+        <button onclick="toggleSection('htmlwally')" class="button">
+            <i class="fas fa-eye"></i> View HTML Wally Post
+        </button>
+        <div id="htmlwally" class="comment-section">
+            <p><strong><i class="far fa-calendar"></i> Date:</strong> 24 January 2025</p>
+            <p><strong><i class="far fa-clock"></i> Time:</strong> 10:45 PM</p>
+            <p><strong><i class="far fa-comment"></i> Comment:</strong> Wall project development</p>
+            <div class="status pending">
+                <i class="fas fa-hourglass-half"></i> Status: Under Development
+            </div>
+        </div>
+    </div>
+
+    <div class="post">
+        <h2><i class="fas fa-clock"></i> Stop Time</h2>
+        <div class="status" id="stopTimeStatus">
+            Stop Time: January 23, 2025 11:57
+        </div>
+        <button class="button" onclick="checkStopTime()">Check Time Status</button>
+    </div>
+
+    <div class="post">
+        <h2><i class="fas fa-calendar-alt"></i> Current Date & Time</h2>
+        <div class="status" id="currentDateTime">
+            Loading...
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleSection(id) {
+    const section = document.getElementById(id);
+    const allSections = document.querySelectorAll('.comment-section');
+    
+    allSections.forEach(s => {
+        if (s !== section) {
+            s.classList.remove('active');
+        }
+    });
+    
+    section.classList.toggle('active');
+}
+
+function toggleCmd() {
+    const cmdSection = document.getElementById('cheaser');
+    cmdSection.classList.toggle('active');
+    if (cmdSection.classList.contains('active')) {
+        document.getElementById('commandInput').focus();
+        document.getElementById('output').innerHTML = "Type 'help' to see available commands";
+    }
+}
+
+function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+        showCmd();
+    }
+}
+
+function showCmd() {
+    const input = document.getElementById('commandInput').value.toLowerCase().trim();
+    const output = document.getElementById('output');
+    
+    if (input === 'help') {
+        output.innerHTML = `Available commands:<br>
+        - help: Show this help message<br>
+        - start: Show start time and ID<br>
+        - stop: Show stop time status<br>
+        - limit: Show time limit info<br>
+        - time: Show current time<br>
+        - clear: Clear the output`;
+    } else if (input === 'time') {
+        const now = new Date();
+        output.innerText = now.toLocaleString();
+    } else if (input === 'start') {
+        const startTime = new Date('2024-10-29T14:29:00');
+        output.innerHTML = `✨ Start Time: October 29, 2024 2:29 PM<br>
+        🆔 ID: #CH9S3R_RUL3X_2024<br>
+        Status: Active`;
+    } else if (input === 'stop') {
+        const stopTime = new Date('2025-01-23T11:57:00');
+        const currentTime = new Date();
+        
+        if (currentTime > stopTime) {
+            output.innerHTML = '❌ Stop time has passed!<br>Stop Time was: January 23, 2025 11:57';
+        } else {
+            output.innerHTML = '✅ System is active<br>Stop Time: January 23, 2025 11:57';
+        }
+    } else if (input === 'limit') {
+        const startTime = new Date('2024-10-29T14:29:00');
+        const stopTime = new Date('2025-01-23T11:57:00');
+        const totalDays = Math.ceil((stopTime - startTime) / (1000 * 60 * 60 * 24));
+        
+        output.innerHTML = `⏳ Time Limit Information:<br>
+        Start: October 29, 2024 2:29 PM<br>
+        Stop: January 23, 2025 11:57 AM<br>
+        Duration: ${totalDays} days<br>
+        🆔 ID: #CH9S3R_RUL3X_2024<br>
+        <br>
+        📊 Account Status:<br>
+        - Account 1: Active (122 days remaining)<br>
+        - Account 2: Active (122 days remaining)<br>
+        - Account 3: Active (122 days remaining)<br>
+        - Account 4: Active (122 days remaining)<br>
+        <br>
+        ⚠️ System Error:<br>
+        10 account tokens have expired!<br>
+        Error Code: TOKEN_EXPIRED_10<br>
+        <br>
+        💬 Comment Limit: 122 days for all active accounts`;
+    } else if (input === 'clear') {
+        output.innerText = '';
+        document.getElementById('commandInput').value = '';
+    } else {
+        output.innerText = "Unknown command! Type 'help' for available commands";
+    }
+    
+    // Clear input after command
+    document.getElementById('commandInput').value = '';
+}
+
+function checkStopTime() {
+    const stopTime = new Date('2025-01-23T11:57:00');
+    const currentTime = new Date();
+    
+    const status = document.getElementById('stopTimeStatus');
+    
+    if (currentTime > stopTime) {
+        status.style.backgroundColor = '#ffebee';
+        status.style.color = '#c62828';
+        status.innerHTML = 'Stop Time Passed: January 23, 2025 11:57';
+    } else {
+        status.style.backgroundColor = '#e8f5e9';
+        status.style.color = '#2e7d32';
+        status.innerHTML = 'Active until: January 23, 2025 11:57';
+    }
+}
+
+function updateDateTime() {
+    const now = new Date();
+    const options = { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+    };
+    const dateTimeStr = now.toLocaleDateString('en-US', options);
+    document.getElementById('currentDateTime').innerHTML = dateTimeStr;
+    document.getElementById('currentDateTime').style.backgroundColor = '#e3f2fd';
+    document.getElementById('currentDateTime').style.color = '#1565c0';
+}
+
+// Update date and time every second
+setInterval(updateDateTime, 1000);
+// Initial update
+updateDateTime();
+
+// Check time status on page load
+window.addEventListener('load', checkStopTime);
+</script>
+
+</body>
+</html>

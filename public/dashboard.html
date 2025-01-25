@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Guru App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: white;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        .dashboard-container {
+            max-width: 100%;
+            padding: 20px;
+            background: white;
+        }
+        .social-row {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            background: #ff7f50;
+            border-radius: 15px;
+            margin: 10px 0;
+            overflow-x: auto;
+            white-space: nowrap;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .social-row::-webkit-scrollbar {
+            display: none;
+        }
+        .social-icon {
+            background: white;
+            border-radius: 50%;
+            min-width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ff7f50;
+            text-decoration: none;
+            transition: transform 0.2s;
+            font-size: 20px;
+        }
+        .social-icon:hover {
+            transform: scale(1.1);
+        }
+        .app-row {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            overflow-x: auto;
+            white-space: nowrap;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            margin: 10px 0;
+        }
+        .app-row::-webkit-scrollbar {
+            display: none;
+        }
+        .app-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #333;
+            min-width: 80px;
+        }
+        .app-icon img {
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            margin-bottom: 5px;
+        }
+        .app-name {
+            font-size: 12px;
+            text-align: center;
+            color: #666;
+            max-width: 70px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background: white;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .menu-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #666;
+            cursor: pointer;
+        }
+        .search-box {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            width: 200px;
+            margin-left: 10px;
+        }
+        .user-profile {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+        }
+        .logout-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .logout-btn:hover {
+            background: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <button class="menu-btn">☰</button>
+            <input type="text" class="search-box" placeholder="Search...">
+        </div>
+        <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Profile" class="user-profile">
+    </header>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+    <div class="dashboard-container">
+        <!-- Social Media Icons Row -->
+        <div class="social-row">
+            <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-facebook-messenger"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-telegram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-chrome"></i></a>
+            <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+        </div>
+
+        <!-- First Row of Apps -->
+        <div class="app-row">
+            <a href="#" class="app-icon">
+                <img src="https://play-lh.googleusercontent.com/VojafVZNddI6JvdDGWFrRmxc-prrcInL2AuBymsqGyCp7WKj9SJjqKmWHK8d_A4Eo9Uu" alt="Amazon">
+                <span class="app-name">Amazon</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://play-lh.googleusercontent.com/TBRwjS_qfJCSj1m7zZB93FnpJM5fSpMA_wUlFDLxWAb45T9RmwBvQd5cWR5viJJOhkI" alt="Netflix">
+                <span class="app-name">Netflix</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://play-lh.googleusercontent.com/lMoItBgdPPVDJsNOVtP26EKHePkwBg-PkuY9NOrc-fumRtTFP4XhpUNk_22syN4Datc" alt="YouTube">
+                <span class="app-name">YouTube</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://play-lh.googleusercontent.com/P2VMEenhpIsubG2oWbvuLGrs0GyyzLiDosGTg8bi8htRXg9Uf0eUtHiUjC28p1jgHzo" alt="Spotify">
+                <span class="app-name">Spotify</span>
+            </a>
+            <a href="windsurf-folder.html" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2965/2965300.png" alt="Windsurf">
+                <span class="app-name">Windsurf</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/1041/1041916.png" alt="Convo">
+                <span class="app-name">Convo</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2965/2965358.png" alt="Post Wall">
+                <span class="app-name">Post Wall</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/4725/4725478.png" alt="Token 99">
+                <span class="app-name">Token 99</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2991/2991147.png" alt="Messages">
+                <span class="app-name">Messages</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/3524/3524659.png" alt="Settings">
+                <span class="app-name">Settings</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2991/2991110.png" alt="Gallery">
+                <span class="app-name">Gallery</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2991/2991117.png" alt="Calendar">
+                <span class="app-name">Calendar</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2991/2991112.png" alt="Notes">
+                <span class="app-name">Notes</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2991/2991114.png" alt="Weather">
+                <span class="app-name">Weather</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" alt="Maps">
+                <span class="app-name">Maps</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2991/2991115.png" alt="Clock">
+                <span class="app-name">Clock</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2991/2991113.png" alt="Calculator">
+                <span class="app-name">Calculator</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2991/2991116.png" alt="Camera">
+                <span class="app-name">Camera</span>
+            </a>
+        </div>
+
+        <!-- Second Row of Apps -->
+        <div class="app-row">
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2991/2991147.png" alt="Messages">
+                <span class="app-name">Messages</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/3524/3524659.png" alt="Settings">
+                <span class="app-name">Settings</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2991/2991110.png" alt="Gallery">
+                <span class="app-name">Gallery</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2991/2991117.png" alt="Calendar">
+                <span class="app-name">Calendar</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2991/2991112.png" alt="Notes">
+                <span class="app-name">Notes</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2991/2991114.png" alt="Weather">
+                <span class="app-name">Weather</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" alt="Maps">
+                <span class="app-name">Maps</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2991/2991115.png" alt="Clock">
+                <span class="app-name">Clock</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2991/2991113.png" alt="Calculator">
+                <span class="app-name">Calculator</span>
+            </a>
+            <a href="#" class="app-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/2991/2991116.png" alt="Camera">
+                <span class="app-name">Camera</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Check if user is logged in
+        if (!sessionStorage.getItem('isLoggedIn')) {
+            window.location.href = 'index.html';
+        }
+
+        function logout() {
+            sessionStorage.removeItem('isLoggedIn');
+            sessionStorage.removeItem('username');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
