@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login - Guru App</title>
+    <link rel="stylesheet" href="../shared/styles/main.css">
+    <link rel="stylesheet" href="styles/login.css">
+</head>
+<body>
+    <div class="matrix-bg"></div>
+    
+    <div class="container">
+        <div class="login-box">
+            <div class="glitch-wrapper">
+                <h1 class="glitch" data-text="USER LOGIN">USER LOGIN</h1>
+            </div>
+            
+            <form id="loginForm" onsubmit="return handleLogin(event)">
+                <div class="input-group">
+                    <input type="text" id="username" required>
+                    <label for="username">Username</label>
+                    <div class="input-line"></div>
+                </div>
+                
+                <div class="input-group">
+                    <input type="password" id="password" required>
+                    <label for="password">Password</label>
+                    <div class="input-line"></div>
+                </div>
+                
+                <div class="error-message" id="errorMessage"></div>
+                
+                <button type="submit" class="neon-button">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    LOGIN
+                </button>
+            </form>
+            
+            <div class="system-message" id="systemMessage">
+                > SYSTEM INITIALIZING...
+            </div>
+        </div>
+    </div>
+
+    <script src="../shared/scripts/matrix.js"></script>
+    <script src="scripts/login.js"></script>
+</body>
+</html>
